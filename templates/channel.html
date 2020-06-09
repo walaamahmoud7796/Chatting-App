@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {{ JSGlue.include() }}
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <script src="{{ url_for('static', filename='msgs.js') }}"></script>
+        <title>Vote</title>
+    </head>
+    <body onload="setStorage()">
+
+        <input type="text" name="" placeholder="message">
+        <button id="send"type="button" name="button">Send</button>
+
+        {%if ava_msgs%}
+        <p>There is {{ava_msgs[channel_name].length}} msgs in this channel</p>
+        {% for i in ava_msgs[channel_name]%}
+        <div>
+          <h3>{{i['user']}}</h3>
+          {%if i['msg'] == "This message was deleted"%}
+          <p style="color:#808080;">{{i['msg']}}</p>
+          {%else%}
+          <p>{{i['msg']}}</p>
+          {%endif%}
+
+        </div>
+
+        {%endfor%}
+        {%endif %}
+    </body>
+</html>
